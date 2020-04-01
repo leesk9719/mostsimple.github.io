@@ -1,3 +1,6 @@
-import { CountUp } from './countUp.js';
+import { CountUp } from "./countUp.js";
 let countUp = new CountUp("number", 404);
-countUp.start();
+
+setTimeout(function() {
+  countUp.start();
+}, 1000);
