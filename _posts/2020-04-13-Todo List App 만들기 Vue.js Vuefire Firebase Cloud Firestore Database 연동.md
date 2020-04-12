@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "[Todo List App 만들기] Vue.js / Vuefire / Firebase Cloud Firestore Database 연동"
@@ -32,17 +31,17 @@ $ npm install firebase vuefire
 
 ### 2. Firebase 프로젝트 생성
 
-##### 2.1 https://console.firebase.google.com 구글 계정 로그인 후 [프로젝트 만들기] 클릭
-##### 2.2 프로젝트 이름 작성 후 [계속] 클릭
-##### 2.3 Google 애널리틱스 사용 설정 또는 해제 (아무거나 상관 없음) 후 [프로젝트 만들기] 클릭
-##### 2.4 잠시 기다린 후 '새 프로젝트가 준비되었습니다.'가 나오면 [계속] 클릭
-##### 2.5 프로젝트 생성 완료
+#### 2.1 https://console.firebase.google.com 구글 계정 로그인 후 [프로젝트 만들기] 클릭
+#### 2.2 프로젝트 이름 작성 후 [계속] 클릭
+#### 2.3 Google 애널리틱스 사용 설정 또는 해제 (아무거나 상관 없음) 후 [프로젝트 만들기] 클릭
+#### 2.4 잠시 기다린 후 '새 프로젝트가 준비되었습니다.'가 나오면 [계속] 클릭
+#### 2.5 프로젝트 생성 완료
 
 ****
 
 ### 3. Firebase 설정
 
-##### 3-1. 앱에 Firebase를 추가하여 시작하기
+#### 3-1. 앱에 Firebase를 추가하여 시작하기
    - [</> 아이콘] 클릭
 ![image-20200412015908099](../img/200413/image-20200412015908099.png)
    - 앱 닉네임 작성 후 [앱 등록] 클릭
@@ -51,7 +50,7 @@ $ npm install firebase vuefire
 ![image-20200412020951180](../img/200413/image-20200412020951180.png)
 
    
-##### 3-2. firebase.js 생성
+#### 3-2. firebase.js 생성
 ~~~javascript
 // /src/Firebase.js
 import { initializeApp } from "firebase";
@@ -75,7 +74,7 @@ export const todosCollection = db.collection('todos');
 ~~~
 
    
-##### 3-3. main.js 수정
+#### 3-3. main.js 수정
 
 ~~~javascript
 // /src/main.js
@@ -101,16 +100,16 @@ new Vue({
 ****
 
 ### 4. Cloud Firestore 데이터베이스 만들기
-##### 4-1. 프로젝트 콘솔 메인에서 Cloud Firestore 배너 클릭
+#### 4-1. 프로젝트 콘솔 메인에서 Cloud Firestore 배너 클릭
 
 ![image-20200412023702560](../img/200413/image-20200412023702560.png)
 
-##### 4-2. [데이터베이스 만들기] 클릭
+#### 4-2. [데이터베이스 만들기] 클릭
 ![image-20200412023954004](../img/200413/image-20200412023954004.png)
 
    
 
-##### 4-3. 보안 규칙 설정
+#### 4-3. 보안 규칙 설정
 
    - [테스트 모드로 시작] 클릭 (추후 설정을 변경해줘야 함)
    - [다음] 클릭
@@ -118,7 +117,7 @@ new Vue({
 
 
 
-##### 4-4. 위치 설정
+#### 4-4. 위치 설정
 
    - 데이터베이스가 만들어질 물리적인 위치를 설정합니다.
 - 앱을 주로 사용하는 사용자와 물리적으로 가까운 위치로 설정하는 것이 좋습니다.
@@ -134,7 +133,7 @@ new Vue({
 ****
 
 ### 5. DB에 임시 데이터 삽입
-##### 5-1.  컬렉션 ID 지정
+#### 5-1.  컬렉션 ID 지정
    - [+ 컬렉션 시작] 클릭
    - 3-2에서 설정한 'todos'를 컬렉션 ID에 입력
 ~~~javascript
@@ -147,7 +146,7 @@ export const todosCollection = db.collection('todos');
 ![image-20200412025411455](../img/200413/image-20200412025125996.png)
    - [다음] 클릭
 
-##### 5-2. 첫 번째 문서 추가
+#### 5-2. 첫 번째 문서 추가
    - 문서 ID는 공란으로 설정 (자동 ID가 생성됨)
    - completed, boolean : Todo 완료 여부 저장
    - createdDate, timestamp: Todo 생성 일시 저장
@@ -159,7 +158,7 @@ export const todosCollection = db.collection('todos');
 ****
 
 ### 6. Vue 설정
-##### 6-1. Todo.vue 생성
+#### 6-1. Todo.vue 생성
    - Vuetify Form과 List 문서를 참고해서 기본적인 구조 생성
 
 ~~~vue
@@ -217,7 +216,7 @@ export const todosCollection = db.collection('todos');
    </script>
 ~~~
 
-##### 6-2. App.vue 수정
+#### 6-2. App.vue 수정
 ~~~vue
 // /src/App.vue
 <template>
@@ -242,11 +241,11 @@ export const todosCollection = db.collection('todos');
 </script>
 ~~~
 
-##### 6-3. 실행 결과
+#### 6-3. 실행 결과
 ![image-20200412224933045](../img/200413/image-20200412224933045.png)
 
 ### 7. Firestore CRUD
-##### 7-1. Read
+#### 7-1. Read
    - Todo.vue 수정
  ~~~vue
  // /src/components/Todo.vue
@@ -335,7 +334,7 @@ export const todosCollection = db.collection('todos');
      completed의 false 값과 text의 "Test Todo" 값을 불러온 모습
 ![image-20200412232842582](../img/200413/image-20200412232724517.png)
 
-##### 7-2. Create
+#### 7-2. Create
    - Todo.vue 수정
  ~~~vue
  // /src/components/Todo.vue
@@ -423,7 +422,7 @@ export const todosCollection = db.collection('todos');
      New Todo를 작성하고 ADD 버튼을 클릭하면 실시간으로 DB에 추가되고 콘솔에 문서 ID가 출력되는 것 확인
 ![image-20200412233814566](../img/200413/image-20200412233814566.png)
 
-##### 7-3. Update
+#### 7-3. Update
    - Todo.vue 수정
  ~~~vue
  // /src/components/Todo.vue
@@ -526,7 +525,7 @@ export const todosCollection = db.collection('todos');
      체크박스 클릭시 실시간으로 DB 값이 변경되는 것 확인
 ![image-20200413001306835](../img/200413/image-20200413000054790.png)
 
-##### 7-4. Delete
+#### 7-4. Delete
    - Todo.vue 수정
  ~~~vue
  // /src/components/Todo.vue
