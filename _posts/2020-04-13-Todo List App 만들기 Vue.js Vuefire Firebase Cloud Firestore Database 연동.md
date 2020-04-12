@@ -130,7 +130,7 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
 
    
 
-   4-2. 보안 규칙 설정
+   4-3. 보안 규칙 설정
 
    - [테스트 모드로 시작] 클릭 (추후 설정을 변경해줘야 함)
 
@@ -155,6 +155,8 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
    - (참고)
 
      ![image-20200412024409295](../img/200413/image-20200412024409295.png)
+     
+     
 
    4-5. Database 생성 완료
 
@@ -187,37 +189,29 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
    5-2. 첫 번째 문서 추가
 
    - 문서 ID는 공란으로 설정 (자동 ID가 생성됨)
-
-   - completed, boolean : Todo 완료 여부 저장
+- completed, boolean : Todo 완료 여부 저장
    - createdDate, timestamp: Todo 생성 일시 저장
    - text, string: Todo 내용 저장
    - 입력 후 [저장] 클릭
-
-   ![image-20200412025907290](../img/200413/image-20200412025907290.png)
-
+   
+![image-20200412025907290](../img/200413/image-20200412025907290.png)
    
 
+   
 6. Vue 설정
 
    6-1. Todo.vue 생성
 
-   - Vuetify 
+   - Vuetify Form과 List 문서를 참고해서 기본적인 구조 생성
 
-     [Form]: https://vuetifyjs.com/ko/components/forms/
-
-     과 
-
-     [List]: https://vuetifyjs.com/ko/components/lists/
-
-      문서를 참고해서 기본적인 구조 생성
-
-   ~~~vue
+   
+~~~vue
    // /src/components/Todo.vue
-   <template>
+<template>
      <v-container>
-       <v-card class="mx-auto" max-width="600">
+    <v-card class="mx-auto" max-width="600">
          <v-form ref="form">
-           <v-row align="center" justify="center">
+        <v-row align="center" justify="center">
              <v-col cols="9">
                <v-text-field v-model="newTodo" label="New Todo"></v-text-field>
                <!-- 새로운 Todo를 입력하는 텍스트 필드 -->
@@ -265,18 +259,18 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
    };
    </script>
    ~~~
-
    
-
+   
+   
    6-2. App.vue 수정
-
+   
    ~~~vue
    // /src/App.vue
-   <template>
+<template>
         <v-app>
-          <v-content>
+       <v-content>
             <Todo />
-          </v-content>
+       </v-content>
         </v-app>
       </template>
       
@@ -293,14 +287,12 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
       };
    </script>
    ~~~
-
    
-
+   
+   
    6-4. 실행 결과
 
 ![image-20200412224933045](../img/200413/image-20200412224933045.png)
-
-
 
 7. Firestore CRUD
 
@@ -308,181 +300,186 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
 
    - Todo.vue 수정
 
-       ~~~html
-       // /src/components/Todo.vue
-       <template>
-         <v-container>
-           <v-card class="mx-auto" max-width="600">
-             <v-form ref="form">
-               <v-row align="center" justify="center">
-                 <v-col cols="9">
-                   <v-text-field v-model="newTodo" label="New Todo"></v-text-field>
-                   <!-- 새로운 Todo를 입력하는 텍스트 필드 -->
-                 </v-col>
-                 <v-col cols="2">
-                   <v-btn rounded type="submit">ADD</v-btn>
-                   <!-- Todo 추가 버튼 -->
-                 </v-col>
-               </v-row>
-             </v-form>
+     ~~~vue
+     // /src/components/Todo.vue
+     <template>
+       <v-container>
+         <v-card class="mx-auto" max-width="600">
+           <v-form ref="form">
+             <v-row align="center" justify="center">
+               <v-col cols="9">
+                 <v-text-field v-model="newTodo" label="New Todo"></v-text-field>
+                 <!-- 새로운 Todo를 입력하는 텍스트 필드 -->
+               </v-col>
+               <v-col cols="2">
+                 <v-btn rounded type="submit">ADD</v-btn>
+                 <!-- Todo 추가 버튼 -->
+               </v-col>
+             </v-row>
+           </v-form>
+     
+           <v-divider></v-divider>
+     
+           <v-list flat>
+             <v-list-item-group multiple active-class>
+     
+               <!-- 
+            <v-list-item>
+                 <template>
+                   <v-list-item-action>
+                     <v-checkbox input-value="true"></v-checkbox>
+                   </v-list-item-action>
+     
+                   <v-list-item-content>
+                     <v-list-item-title>Todo item</v-list-item-title>
+                   </v-list-item-content>
+                 </template>
+               </v-list-item>
+            -->
+               <!-- 6-1에서 작성했던 부분을 아래와 같이 수정 -->
+     
+               <v-list-item v-for="todo in todos" :key="todo.id">
+               <!-- todos로 읽어온 데이터를 반복해서 출력 -->
+                 <template>
+                   <v-list-item-action>
+                     <v-checkbox :input-value="todo.completed"></v-checkbox>
+                     <!-- completed에 저장된 완료 여부를 체크박스에 반영 -->
+                   </v-list-item-action>
+     
+                   <v-list-item-content>
+                     <v-list-item-title>{{todo.text}}</v-list-item-title>
+                     <!-- todo.text 출력 -->
+                   </v-list-item-content>
+                 </template>
+               </v-list-item>
+     
+             </v-list-item-group>
+           </v-list>
+         </v-card>
+       </v-container>
+     </template>
+     
+     <script>
+     import { todosCollection } from "../firebase";
+     // firebase.js 파일에서 설정한 todosCollection을 불러옴
+     
+     export default {
+       name: "Todo",
+     
+       data: () => ({
+         newTodo: "", // 새로 작성하는 Todo 저장
+         todos: [] // DB에서 가져온 Todos 저장
+       }),
+     
+       firestore() {
+         return {
+           todos: todosCollection.orderBy("createdDate", "desc")
+           // todosCollection을 createdDate를 기준으로 내림차순으로 정렬해서 todos로 가져옴
+         };
+       },
+     
+       methods: {
+       }
+     };
+     </script>
+     ~~~
 
-             <v-divider></v-divider>
+     
 
-             <v-list flat>
-               <v-list-item-group multiple active-class>
-
-                 <!-- 
-              <v-list-item>
-                   <template>
-                     <v-list-item-action>
-                       <v-checkbox input-value="true"></v-checkbox>
-                     </v-list-item-action>
-
-                     <v-list-item-content>
-                       <v-list-item-title>Todo item</v-list-item-title>
-                     </v-list-item-content>
-                   </template>
-                 </v-list-item>
-              -->
-                 <!-- 6-1에서 작성했던 부분을 아래와 같이 수정 -->
-
-                 <v-list-item v-for="todo in todos" :key="todo.id">
-                 <!-- todos로 읽어온 데이터를 반복해서 출력 -->
-                   <template>
-                     <v-list-item-action>
-                       <v-checkbox :input-value="todo.completed"></v-checkbox>
-                       <!-- completed에 저장된 완료 여부를 체크박스에 반영 -->
-                     </v-list-item-action>
-
-                     <v-list-item-content>
-                       <v-list-item-title>{{todo.text}}</v-list-item-title>
-                       <!-- todo.text 출력 -->
-                     </v-list-item-content>
-                   </template>
-                 </v-list-item>
-
-               </v-list-item-group>
-             </v-list>
-           </v-card>
-         </v-container>
-       </template>
-
-       <script>
-       import { todosCollection } from "../firebase";
-       // firebase.js 파일에서 설정한 todosCollection을 불러옴
-
-       export default {
-         name: "Todo",
-
-         data: () => ({
-           newTodo: "", // 새로 작성하는 Todo 저장
-           todos: [] // DB에서 가져온 Todos 저장
-         }),
-
-         firestore() {
-           return {
-             todos: todosCollection.orderBy("createdDate", "desc")
-             // todosCollection을 createdDate를 기준으로 내림차순으로 정렬해서 todos로 가져옴
-           };
-         },
-
-         methods: {
-         }
-       };
-       </script>
-       ~~~
-       
    - 실행 결과
 
      completed의 false 값과 text의 "Test Todo" 값을 불러온 모습
 
      ![image-20200412232842582](../img/200413/image-20200412232724517.png)
-     
-     
+
+   
 
    7-2. Create
 
    - Todo.vue 수정
-   ~~~vue
-   // /src/components/Todo.vue
-   <template>
-     <v-container>
-       <v-card class="mx-auto" max-width="600">
-         <v-form ref="form">
-           <v-row align="center" justify="center">
-             <v-col cols="9">
-               <v-text-field v-model="newTodo" label="New Todo"></v-text-field>
-             </v-col>
-             <v-col cols="2">
-               <v-btn rounded type="submit" @click.prevent="addTodo()">ADD</v-btn>
-               <!-- ADD 버튼 클릭시 addTodo 실행 -->
-             </v-col>
-           </v-row>
-         </v-form>
-   
-         <v-divider></v-divider>
-   
-         <v-list flat>
-           <v-list-item-group multiple active-class>
-             <v-list-item v-for="todo in todos" :key="todo.id">
-               <template>
-                 <v-list-item-action>
-                   <v-checkbox :input-value="todo.completed"></v-checkbox>
-                 </v-list-item-action>
-   
-                 <v-list-item-content>
-                   <v-list-item-title>{{todo.text}}</v-list-item-title>
-                 </v-list-item-content>
-               </template>
-             </v-list-item>
-           </v-list-item-group>
-         </v-list>
-       </v-card>
-     </v-container>
-   </template>
-   
-       <script>
-   import { todosCollection } from "../firebase";
-   // firebase.js 파일에서 설정한 todosCollection을 불러옴
-   
-   export default {
-     name: "Todo",
-   
-     data: () => ({
-       newTodo: "", // 새로 작성하는 Todo 저장
-       todos: [] // DB에서 가져온 Todos 저장
-     }),
-   
-     firestore() {
-       return {
-         todos: todosCollection.orderBy("createdDate", "desc")
-       };
-     },
-   
-     methods: {
-       // 문서를 추가하는 메소드
-       addTodo() {
-         todosCollection
-           .add({
-             completed: false,
-             createdDate: new Date(),
-             text: this.newTodo
-             // completed, createdDate, text 값을 설정해서 추가
-           })
-           .then(function(docRef) {
-             console.log("Add Document ID: ", docRef.id);
-             // 성공시 콘솔에 문서 ID 출력
-           })
-           .catch(function(error) {
-             console.error("Add Error: ", error);
-             // 실패시 콘솔에 에러 출력
-           });
-         this.newTodo = "";
+
+     ~~~vue
+     // /src/components/Todo.vue
+     <template>
+       <v-container>
+         <v-card class="mx-auto" max-width="600">
+           <v-form ref="form">
+             <v-row align="center" justify="center">
+               <v-col cols="9">
+                 <v-text-field v-model="newTodo" label="New Todo"></v-text-field>
+               </v-col>
+               <v-col cols="2">
+                 <v-btn rounded type="submit" @click.prevent="addTodo()">ADD</v-btn>
+                 <!-- ADD 버튼 클릭시 addTodo 실행 -->
+               </v-col>
+             </v-row>
+           </v-form>
+     
+           <v-divider></v-divider>
+     
+           <v-list flat>
+             <v-list-item-group multiple active-class>
+               <v-list-item v-for="todo in todos" :key="todo.id">
+                 <template>
+                   <v-list-item-action>
+                     <v-checkbox :input-value="todo.completed"></v-checkbox>
+                   </v-list-item-action>
+     
+                   <v-list-item-content>
+                     <v-list-item-title>{{todo.text}}</v-list-item-title>
+                   </v-list-item-content>
+                 </template>
+               </v-list-item>
+             </v-list-item-group>
+           </v-list>
+         </v-card>
+       </v-container>
+     </template>
+     
+         <script>
+     import { todosCollection } from "../firebase";
+     // firebase.js 파일에서 설정한 todosCollection을 불러옴
+     
+     export default {
+       name: "Todo",
+     
+       data: () => ({
+         newTodo: "", // 새로 작성하는 Todo 저장
+         todos: [] // DB에서 가져온 Todos 저장
+       }),
+     
+       firestore() {
+         return {
+           todos: todosCollection.orderBy("createdDate", "desc")
+         };
+       },
+     
+       methods: {
+         // 문서를 추가하는 메소드
+         addTodo() {
+           todosCollection
+             .add({
+               completed: false,
+               createdDate: new Date(),
+               text: this.newTodo
+               // completed, createdDate, text 값을 설정해서 추가
+             })
+             .then(function(docRef) {
+               console.log("Add Document ID: ", docRef.id);
+               // 성공시 콘솔에 문서 ID 출력
+             })
+             .catch(function(error) {
+               console.error("Add Error: ", error);
+               // 실패시 콘솔에 에러 출력
+             });
+           this.newTodo = "";
+         }
        }
-     }
-   };
-   </script>
-   ~~~
+     };
+     </script>
+     ~~~
+
+     
 
    - 실행 결과
 
@@ -490,13 +487,13 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
 
      ![image-20200412233814566](../img/200413/image-20200412233814566.png)
 
-   
+     
 
    7-3. Update
 
    - Todo.vue 수정
 
-     ~~~html
+     ~~~vue
      // /src/components/Todo.vue
      <template>
        <v-container>
@@ -593,19 +590,17 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
      </script>
      ~~~
 
+     
+
    - 실행 결과
 
-     체크박스 클릭시 실시간으로 DB 값이 변경되는 것 확인
-
-     ![image-20200413001306835](../img/200413/image-20200413000054790.png)
-
-   
+     체크박스 클릭시 실시간으로 DB 값이 변경되는 것 확인![image-20200413001306835](../img/200413/image-20200413000054790.png)
 
    7-4. Delete
 
    - Todo.vue 수정
 
-     ~~~html
+     ~~~vue
      // /src/components/Todo.vue
      <template>
        <v-container>
@@ -711,13 +706,15 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
      </script>
      ~~~
 
+   
+
    - 실행 결과
 
-     삭제 버튼 클릭시 실시간으로 DB에서 삭제되는 것 확인
+     삭제 버튼 클릭시 실시간으로 DB에서 삭제되는 것 확인![image-20200413002831112](../img/200413/image-20200413002831112.png)
 
-     ![image-20200413002831112](../img/200413/image-20200413002831112.png)
 
-   
+
+
 
 
 
