@@ -49,7 +49,7 @@ $ npm install firebase vuefire
    - firebaseConfig 내용 복사 후 [콘솔로 이동] 클릭
 ![image-20200412020951180](../img/200413/image-20200412020951180.png)
 
-   
+
 #### 3-2. firebase.js 생성
 ~~~javascript
 // /src/Firebase.js
@@ -73,7 +73,7 @@ export const todosCollection = db.collection('todos');
 // db에서 가져올 컬렉션 이름을 'todos'로 설정
 ~~~
 
-   
+
 #### 3-3. main.js 수정
 
 ~~~javascript
@@ -120,7 +120,7 @@ new Vue({
 #### 4-4. 위치 설정
 
    - 데이터베이스가 만들어질 물리적인 위치를 설정합니다.
-- 앱을 주로 사용하는 사용자와 물리적으로 가까운 위치로 설정하는 것이 좋습니다.
+   - 앱을 주로 사용하는 사용자와 물리적으로 가까운 위치로 설정하는 것이 좋습니다.
    - 한국 사용자 기준 도쿄에 위치한 [asia-northeast1] 선택
    - [완료] 클릭
 ![image-20200412223037514](../img/200413/image-20200412024459974.png)
