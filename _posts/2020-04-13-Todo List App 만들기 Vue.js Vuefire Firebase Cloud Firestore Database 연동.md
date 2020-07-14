@@ -3,8 +3,18 @@ title: "[Todo List App 만들기] Vue.js / Vuefire / Firebase Cloud Firestore Da
 header:
   teaser: assets/images/200413/Firebase-Logo.png
 subtitle: 
-gh-repo: iamnamuneulbo/vue-vuefire-todo
-tags: [Vue.js, Vue Router, Vue CLI, Javascript, Vuetify, Firebase, Firestore, Vuefire]
+link: https://github.com/iamnamuneulbo/vue-vuefire-todo
+categories:
+  - Vue
+tags:
+  - Vue.js
+  - Vue Router
+  - Vue CLI
+  - Javascript
+  - Vuetify
+  - Firebase
+  - Firestore
+  - Vuefire
 ---
 
 지난 포스팅에서 만들었던 Vuetify가 추가된 Vue 프로젝트에 Firebase의 DB인 Firestore를 연결해서 Todo 앱을 만들어보겠습니다.
@@ -635,3 +645,5 @@ export default {
 
 다음에는 Firebase Authentication으로 회원가입, 로그인을 구현해보겠습니다.
 
+
+▼ GitHub Repository Link
