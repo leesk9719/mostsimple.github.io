@@ -1,7 +1,8 @@
 ---
-layout: post
 title: "[Todo List App 만들기] Vue.js / Vuefire / Firebase Cloud Firestore Database 연동"
-image: ../img/200413/Firebase-Logo.png
+header:
+  image: assets/images/200413/Firebase-Logo.png
+  teaser: assets/images/200413/Firebase-Logo.png
 subtitle: 
 gh-repo: iamnamuneulbo/vue-vuefire-todo
 gh-badge: [star, fork, follow]
@@ -43,11 +44,11 @@ $ npm install firebase vuefire
 
 #### 3-1. 앱에 Firebase를 추가하여 시작하기
    - [</> 아이콘] 클릭
-![image-20200412015908099](../img/200413/image-20200412015908099.png)
+![image-20200412015908099](../assets/images/200413/image-20200412015908099.png)
    - 앱 닉네임 작성 후 [앱 등록] 클릭
-![image-20200412020755791](../img/200413/image-20200412020737349.png)
+![image-20200412020755791](../assets/images/200413/image-20200412020737349.png)
    - firebaseConfig 내용 복사 후 [콘솔로 이동] 클릭
-![image-20200412020951180](../img/200413/image-20200412020951180.png)
+![image-20200412020951180](../assets/images/200413/image-20200412020951180.png)
 
 
 #### 3-2. firebase.js 생성
@@ -101,10 +102,10 @@ new Vue({
 ### 4. Cloud Firestore 데이터베이스 만들기
 #### 4-1. 프로젝트 콘솔 메인에서 Cloud Firestore 배너 클릭
 
-![image-20200412023702560](../img/200413/image-20200412023702560.png)
+![image-20200412023702560](../assets/images/200413/image-20200412023702560.png)
 
 #### 4-2. [데이터베이스 만들기] 클릭
-![image-20200412023954004](../img/200413/image-20200412023954004.png)
+![image-20200412023954004](../assets/images/200413/image-20200412023954004.png)
 
    
 
@@ -112,7 +113,7 @@ new Vue({
 
    - [테스트 모드로 시작] 클릭 (추후 설정을 변경해줘야 함)
    - [다음] 클릭
-![image-20200412024136990](../img/200413/image-20200412024136990.png)
+![image-20200412024136990](../assets/images/200413/image-20200412024136990.png)
 
 
 
@@ -122,12 +123,12 @@ new Vue({
    - 앱을 주로 사용하는 사용자와 물리적으로 가까운 위치로 설정하는 것이 좋습니다.
    - 한국 사용자 기준 도쿄에 위치한 [asia-northeast1] 선택
    - [완료] 클릭
-![image-20200412223037514](../img/200413/image-20200412024459974.png)
+![image-20200412223037514](../assets/images/200413/image-20200412024459974.png)
    - (참고)
-![image-20200412024409295](../img/200413/image-20200412024409295.png)
+![image-20200412024409295](../assets/images/200413/image-20200412024409295.png)
 
 #### 4-5. Database 생성 완료
-![image-20200412024927483](../img/200413/image-20200412024927483.png)
+![image-20200412024927483](../assets/images/200413/image-20200412024927483.png)
 
 ****
 
@@ -142,7 +143,7 @@ export const todosCollection = db.collection('todos');
 // db에서 가져올 컬렉션 이름을 'todos'로 설정
 ...
 ~~~
-![image-20200412025411455](../img/200413/image-20200412025125996.png)
+![image-20200412025411455](../assets/images/200413/image-20200412025125996.png)
    - [다음] 클릭
 
 #### 5-2. 첫 번째 문서 추가
@@ -152,7 +153,7 @@ export const todosCollection = db.collection('todos');
    - text, string: Todo 내용 저장
    - 입력 후 [저장] 클릭
 
-![image-20200412025907290](../img/200413/image-20200412025907290.png)
+![image-20200412025907290](../assets/images/200413/image-20200412025907290.png)
 
 ****
 
@@ -238,7 +239,7 @@ export default {
 ~~~
 
 #### 6-3. 실행 결과
-![image-20200412224933045](../img/200413/image-20200412224933045.png)
+![image-20200412224933045](../assets/images/200413/image-20200412224933045.png)
 
 ### 7. Firestore CRUD
 #### 7-1. Read
@@ -327,7 +328,7 @@ export default {
 
    - 실행 결과
      completed의 false 값과 text의 "Test Todo" 값을 불러온 모습
-![image-20200412232842582](../img/200413/image-20200412232724517.png)
+![image-20200412232842582](../assets/images/200413/image-20200412232724517.png)
 
 #### 7-2. Create
    - Todo.vue 수정
@@ -416,7 +417,7 @@ export default {
 
    - 실행 결과
      New Todo를 작성하고 ADD 버튼을 클릭하면 실시간으로 DB에 추가되고 콘솔에 문서 ID가 출력되는 것 확인
-![image-20200412233814566](../img/200413/image-20200412233814566.png)
+![image-20200412233814566](../assets/images/200413/image-20200412233814566.png)
 
 #### 7-3. Update
    - Todo.vue 수정
@@ -517,7 +518,7 @@ export default {
      ~~~
    - 실행 결과
      체크박스 클릭시 실시간으로 DB 값이 변경되는 것 확인
-![image-20200413001306835](../img/200413/image-20200413000054790.png)
+![image-20200413001306835](../assets/images/200413/image-20200413000054790.png)
 
 #### 7-4. Delete
    - Todo.vue 수정
@@ -627,7 +628,7 @@ export default {
      ~~~
    - 실행 결과
      삭제 버튼 클릭시 실시간으로 DB에서 삭제되는 것 확인
-![image-20200413002831112](../img/200413/image-20200413002831112.png)
+![image-20200413002831112](../assets/images/200413/image-20200413002831112.png)
 
 
 
