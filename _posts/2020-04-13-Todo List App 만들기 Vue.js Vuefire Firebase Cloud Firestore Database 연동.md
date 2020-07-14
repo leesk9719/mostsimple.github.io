@@ -1,23 +1,18 @@
 ---
 title: "[Todo List App 만들기] Vue.js / Vuefire / Firebase Cloud Firestore Database 연동"
 header:
-  image: assets/images/200413/Firebase-Logo.png
   teaser: assets/images/200413/Firebase-Logo.png
 subtitle: 
 gh-repo: iamnamuneulbo/vue-vuefire-todo
-gh-badge: [star, fork, follow]
 tags: [Vue.js, Vue Router, Vue CLI, Javascript, Vuetify, Firebase, Firestore, Vuefire]
-comments: true
 ---
+
+지난 포스팅에서 만들었던 Vuetify가 추가된 Vue 프로젝트에 Firebase의 DB인 Firestore를 연결해서 Todo 앱을 만들어보겠습니다.
+
 
 Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니다.
 
 처음 공부하는 거라 틀린 부분이 있을 수 있습니다.
-
-
-
-지난 포스팅에서 만들었던 Vuetify가 추가된 Vue 프로젝트에 Firebase의 DB인 Firestore를 연결해서 Todo 앱을 만들어보겠습니다.
-
 
 
 ### 1. Firebase와 Vuefire 설치
