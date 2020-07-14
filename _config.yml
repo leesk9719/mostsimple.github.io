@@ -97,6 +97,7 @@ author:
   avatar           : "/assets/images/avatar-icon.png"
   bio              : "I AM **NAMUNEULBO**"
   location         : "Republic of Korea"
+  home             : "/"
   email            :
   links:
     - label: "Email"
@@ -275,7 +276,8 @@ defaults:
     values:
       layout: single
       author_profile: true
-      read_time: true
-      comments: # true
+      read_time: false
+      comments: true
       share: true
       related: true
+      classes: wide
