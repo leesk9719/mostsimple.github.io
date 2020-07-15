@@ -27,9 +27,9 @@ Vue.js 공부를 하면서 프로젝트를 시작하는 과정을 기록합니�
 
 ### 1. Firebase와 Vuefire 설치
 
-~~~shell
+```shell
 $ npm install firebase vuefire
-~~~
+```
 
    명령어를 입력하면 Vue 프로젝트에 Firebase와 Vuefire가 추가됩니다.
 
@@ -57,7 +57,7 @@ $ npm install firebase vuefire
 
 
 #### 3-2. firebase.js 생성
-~~~javascript
+```javascript
 // /src/Firebase.js
 import { initializeApp } from "firebase";
 
@@ -77,12 +77,12 @@ const app = initializeApp(firebaseConfig);
 export const db = app.firestore();
 export const todosCollection = db.collection("todos");
 // db에서 가져올 컬렉션 이름을 'todos'로 설정
-~~~
+```
 
 
 #### 3-3. main.js 수정
 
-~~~javascript
+```javascript
 // /src/main.js
 import Vue from "vue";
 import App from "./App.vue";
@@ -100,7 +100,7 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount("#app");
-~~~
+```
 
 ****
 
@@ -141,13 +141,13 @@ new Vue({
 #### 5-1.  컬렉션 ID 지정
    - [+ 컬렉션 시작] 클릭
    - 3-2에서 설정한 'todos'를 컬렉션 ID에 입력
-~~~javascript
+```javascript
 // /src/Firebase.js
 ...
 export const todosCollection = db.collection('todos');
 // db에서 가져올 컬렉션 이름을 'todos'로 설정
 ...
-~~~
+```
 ![image-20200412025411455](/assets/images/200413/image-20200412025125996.png)
    - [다음] 클릭
 
@@ -166,7 +166,7 @@ export const todosCollection = db.collection('todos');
 #### 6-1. Todo.vue 생성
    - Vuetify Form과 List 문서를 참고해서 기본적인 구조 생성
 
-~~~vue
+```vue
 // /src/components/Todo.vue
 <template>
   <v-container>
@@ -216,10 +216,10 @@ export default {
   methods: {}
 };
 </script>
-~~~
+```
 
 #### 6-2. App.vue 수정
-~~~vue
+```vue
 // /src/App.vue
 <template>
   <v-app>
@@ -241,7 +241,7 @@ export default {
   }
 };
 </script>
-~~~
+```
 
 #### 6-3. 실행 결과
 ![image-20200412224933045](/assets/images/200413/image-20200412224933045.png)
@@ -250,7 +250,7 @@ export default {
 #### 7-1. Read
    - Todo.vue 수정
 
-     ~~~vue
+     ```vue
      // /src/components/Todo.vue
       <template>
        <v-container>
@@ -296,7 +296,7 @@ export default {
                    </v-list-item-action>
      
                    <v-list-item-content>
-                     <v-list-item-title>{{todo.text}}</v-list-item-title>
+                     <v-list-item-title>{% raw %}{{todo.text}}{% endraw %}</v-list-item-title>
                      <!-- todo.text 출력 -->
                    </v-list-item-content>
                  </template>
@@ -329,7 +329,7 @@ export default {
        methods: {}
      };
      </script>
-     ~~~
+     ```
 
    - 실행 결과
      completed의 false 값과 text의 "Test Todo" 값을 불러온 모습
@@ -338,7 +338,7 @@ export default {
 #### 7-2. Create
    - Todo.vue 수정
 
-     ~~~vue
+     ```vue
      // /src/components/Todo.vue
       <template>
        <v-container>
@@ -366,7 +366,7 @@ export default {
                    </v-list-item-action>
      
                    <v-list-item-content>
-                     <v-list-item-title>{{todo.text}}</v-list-item-title>
+                     <v-list-item-title>{% raw %}{{todo.text}}{% endraw %}</v-list-item-title>
                    </v-list-item-content>
                  </template>
                </v-list-item>
@@ -417,7 +417,7 @@ export default {
        }
      };
      </script>
-     ~~~
+     ```
 
 
    - 실행 결과
@@ -427,7 +427,7 @@ export default {
 #### 7-3. Update
    - Todo.vue 수정
 
-     ~~~vue
+     ```vue
       // /src/components/Todo.vue
       <template>
        <v-container>
@@ -459,7 +459,7 @@ export default {
                    </v-list-item-action>
      
                    <v-list-item-content>
-                     <v-list-item-title>{{todo.text}}</v-list-item-title>
+                     <v-list-item-title>{% raw %}{{todo.text}}{% endraw %}</v-list-item-title>
                    </v-list-item-content>
                  </template>
                </v-list-item>
@@ -520,7 +520,7 @@ export default {
        }
      };
      </script>
-     ~~~
+     ```
    - 실행 결과
      체크박스 클릭시 실시간으로 DB 값이 변경되는 것 확인
 ![image-20200413001306835](/assets/images/200413/image-20200413000054790.png)
@@ -528,7 +528,7 @@ export default {
 #### 7-4. Delete
    - Todo.vue 수정
 
-     ~~~vue
+     ```vue
       // /src/components/Todo.vue
       <template>
        <v-container>
@@ -559,7 +559,7 @@ export default {
                    </v-list-item-action>
      
                    <v-list-item-content>
-                     <v-list-item-title>{{todo.text}}</v-list-item-title>
+                     <v-list-item-title>{% raw %}{{todo.text}}{% endraw %}</v-list-item-title>
                    </v-list-item-content>
      
                    <!-- delete 버튼 -->
@@ -630,7 +630,7 @@ export default {
        }
      };
      </script>
-     ~~~
+     ```
    - 실행 결과
      삭제 버튼 클릭시 실시간으로 DB에서 삭제되는 것 확인
 ![image-20200413002831112](/assets/images/200413/image-20200413002831112.png)
